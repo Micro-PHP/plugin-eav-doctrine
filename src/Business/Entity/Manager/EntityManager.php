@@ -1,9 +1,9 @@
 <?php
 
-namespace Micro\Plugin\Eav\Doctrine\Business\Entity;
+namespace Micro\Plugin\Eav\Doctrine\Business\Entity\Manager;
 
 use ArrayAccess;
-use Micro\Plugin\Eav\Business\Entity\EntityManagerInterface;
+use Micro\Plugin\Eav\Business\Entity\Manager\EntityManagerInterface;
 use Micro\Plugin\Eav\Doctrine\Entity\Entity\Entity;
 use Micro\Plugin\Eav\Doctrine\Entity\Schema\Schema;
 use Micro\Plugin\Eav\Entity\Entity\EntityInterface;

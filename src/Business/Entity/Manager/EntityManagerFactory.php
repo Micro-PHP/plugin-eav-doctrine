@@ -1,11 +1,11 @@
 <?php
 
-namespace Micro\Plugin\Eav\Doctrine\Business\Entity;
+namespace Micro\Plugin\Eav\Doctrine\Business\Entity\Manager;
 
 use Doctrine\ORM\EntityManagerInterface as DoctrineEntityManager;
 use Micro\Plugin\Doctrine\DoctrineFacadeInterface;
-use Micro\Plugin\Eav\Business\Entity\EntityManagerFactoryInterface;
-use Micro\Plugin\Eav\Business\Entity\EntityManagerInterface;
+use Micro\Plugin\Eav\Business\Entity\Manager\EntityManagerFactoryInterface;
+use Micro\Plugin\Eav\Business\Entity\Manager\EntityManagerInterface;
 
 class EntityManagerFactory implements EntityManagerFactoryInterface
 {

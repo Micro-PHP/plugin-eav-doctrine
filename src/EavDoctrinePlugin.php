@@ -4,10 +4,10 @@ namespace Micro\Plugin\Eav\Doctrine;
 
 use Micro\Plugin\Doctrine\DoctrineFacadeInterface;
 use Micro\Plugin\Eav\Business\Attribute\AttributeFactoryInterface;
-use Micro\Plugin\Eav\Business\Entity\EntityManagerFactoryInterface;
+use Micro\Plugin\Eav\Business\Entity\Manager\EntityManagerFactoryInterface;
 use Micro\Plugin\Eav\Business\Schema\SchemaManagerFactoryInterface;
 use Micro\Plugin\Eav\Doctrine\Business\Attribute\AttributeFactory;
-use Micro\Plugin\Eav\Doctrine\Business\Entity\EntityManagerFactory;
+use Micro\Plugin\Eav\Doctrine\Business\Entity\Manager\EntityManagerFactory;
 use Micro\Plugin\Eav\Doctrine\Business\Schema\SchemaManagerFactory;
 use Micro\Plugin\Eav\EavCorePlugin;
 

@@ -6,7 +6,6 @@ use ArrayAccess;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use Micro\Plugin\Eav\Business\Schema\SchemaFactoryInterface;
 use Micro\Plugin\Eav\Business\Schema\SchemaManagerInterface;
 use Micro\Plugin\Eav\Doctrine\Entity\Attribute\Attribute;
 use Micro\Plugin\Eav\Doctrine\Entity\Schema\Schema;
