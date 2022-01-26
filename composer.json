@@ -1,0 +1,23 @@
+{
+    "name": "micro/plugin-eav-doctrine",
+    "description": "Micro Framework: Adapter for micro/plugin-eav-core based on micro/plugin-doctrine",
+    "type": "library",
+    "license": "MIT",
+    "version": "0.1",
+    "autoload": {
+        "psr-4": {
+            "Micro\\Plugin\\Eav\\Doctrine\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Stanislau.Komar",
+            "email": "stanislau_komar@epam.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "micro/plugin-doctrine": "^0.1",
+        "micro/plugin-eav-core": "^0.1"
+    }
+}
