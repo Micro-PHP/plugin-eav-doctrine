@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Micro\Plugin\Eav\Doctrine\Entity\Attribute\Attribute;
 use Micro\Plugin\Eav\Doctrine\Entity\EavCoreModelTrait;
 use Micro\Plugin\Eav\Doctrine\Entity\Entity\Entity;
+use Micro\Plugin\Eav\Entity\Unique\UniqueIndexInterface;
 
 /**
  * @ORM\Table(name="micro_eav_unique_idx")
@@ -13,7 +14,7 @@ use Micro\Plugin\Eav\Doctrine\Entity\Entity\Entity;
  */
 #[ORM\Table(name: 'micro_eav_unique_idx')]
 #[ORM\Entity]
-class UniqueIndex
+class UniqueIndex implements UniqueIndexInterface
 {
     use EavCoreModelTrait;
     /**
@@ -42,14 +43,21 @@ class UniqueIndex
     private Attribute $attribute;
 
     /**
-     * @param string $uniqueKey
-     * @return $this
+     * {@inheritDoc}
      */
     public function setUniqueKey(string $uniqueKey): self
     {
         $this->uniqueKey = $uniqueKey;
 
         return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUniqueKey(): string
+    {
+        return $this->uniqueKey;
     }
 
     /**
@@ -62,6 +70,7 @@ class UniqueIndex
 
     /**
      * @param Entity $entity
+     *
      * @return UniqueIndex
      */
     public function setEntity(Entity $entity): self
@@ -69,14 +78,6 @@ class UniqueIndex
         $this->entity = $entity;
 
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUniqueKey(): string
-    {
-        return $this->uniqueKey;
     }
 
     /**
@@ -89,6 +90,7 @@ class UniqueIndex
 
     /**
      * @param Attribute $attribute
+     *
      * @return UniqueIndex
      */
     public function setAttribute(Attribute $attribute): UniqueIndex

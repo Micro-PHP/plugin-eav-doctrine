@@ -110,14 +110,6 @@ class Schema implements SchemaInterface
     }
 
     /**
-     * @return ArrayCollection<Entity>
-     */
-    public function getEntities(): ArrayCollection
-    {
-        return $this->entities;
-    }
-
-    /**
      * @return ArrayCollection<Attribute>
      */
     public function getAttributes(): \ArrayAccess
@@ -155,7 +147,7 @@ class Schema implements SchemaInterface
     }
 
     /**
-     * @return string|null
+     * {@inheritDoc}
      */
     public function getEntityClass(): ?string
     {
@@ -163,8 +155,7 @@ class Schema implements SchemaInterface
     }
 
     /**
-     * @param string|null $entityClass
-     * @return $this
+     * {@inheritDoc}
      */
     public function setEntityClass(?string $entityClass): self
     {

@@ -22,7 +22,7 @@ use Micro\Plugin\Eav\Entity\Entity\EntityInterface;
 #[ORM\Entity]
 #[ORM\Table(name: 'micro_eav_entity')]
 #[ORM\Index(columns: ['id', 'schema_id'], name: 'entity_sch_idx')]
-#[ORM\HasLifecycleCallbacks]
+#[ORM\HasLifecycleCallbacks()]
 class Entity implements EntityInterface
 {
     use EavCoreModelTrait;
@@ -87,21 +87,22 @@ class Entity implements EntityInterface
      * ORM\JoinColumn(name="id", referencedColumnName="entity_id", nullable=false, onDelete="CASCADE")
      */
     #[ORM\OneToMany(mappedBy: 'entity', targetEntity: UniqueIndex::class, fetch: 'EXTRA_LAZY', orphanRemoval: false)]
-    private ArrayCollection $uniqueIndexes;
+    private Collection $uniqueIndexes;
 
     /**
      * Model constructor.
      */
     public function __construct(Schema $schema)
     {
-        $this->values = new ArrayCollection();
-        $this->uniqueIndexes = new ArrayCollection();
+        $this->values = new ArrayCollection([]);
+        $this->uniqueIndexes = new ArrayCollection([]);
         $this->schema = $schema;
     }
 
     /**
      * @ORM\PrePersist()
      */
+    #[ORM\PrePersist]
     public function prePersist(): void
     {
         $this->createdAt = new \DateTime();
@@ -110,6 +111,7 @@ class Entity implements EntityInterface
     /**
      * @ORM\PreUpdate()
      */
+    #[ORM\PreUpdate]
     public function preUpdate(): void
     {
         $this->updatedAt = new \DateTime();
@@ -137,16 +139,6 @@ class Entity implements EntityInterface
     public function getSchema(): ?Schema
     {
         return $this->schema;
-    }
-
-    /**
-     * @param Schema $schema
-     * @return Entity
-     */
-    public function setSchema(Schema $schema): Entity
-    {
-        $this->schema = $schema;
-        return $this;
     }
 
     /**

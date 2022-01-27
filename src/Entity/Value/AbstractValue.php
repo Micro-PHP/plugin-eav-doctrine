@@ -23,39 +23,34 @@ use Micro\Plugin\Eav\Entity\Value\ValueInterface;
  *   @ORM\Index(name="rel_idx", columns={"attribute_id", "entity_id"})
  *     })
  * @ORM\InheritanceType("JOINED")
- * @ORM\DiscriminatorColumn(name="value_type", type="integer")
+ * @ORM\DiscriminatorColumn(name="value_type", type="string")
  * @ORM\DiscriminatorMap({
- *     1 => BooleanType::class,
- *     2 => IntegerType::class,
- *     3 => FloatType::class,
- *     4 => StringType::class,
- *     5 => TextType::class,
- *     9 => DateType::class,
- *     10 => DateTimeType::class
+ *     BooleanType::TYPE => BooleanType::class,
+ *     IntegerType::TYPE => IntegerType::class,
+ *     FloatType::TYPE => FloatType::class,
+ *     StringType::TYPE => StringType::class,
+ *     TextType::TYPE => TextType::class,
+ *     DateType::TYPE => DateType::class,
+ *     DateTimeType::TYPE => DateTimeType::class
  * })
  */
 #[ORM\Entity]
 #[ORM\Table(name: 'micro_eav_value_abstract')]
 #[ORM\Index(columns: ['attribute_id', 'entity_id'], name: 'rel_idx')]
 #[ORM\InheritanceType('JOINED')]
-#[ORM\DiscriminatorColumn('value_type', type: 'integer')]
+#[ORM\DiscriminatorColumn('value_type', type: 'string')]
 #[ORM\DiscriminatorMap([
-    1 => BooleanType::class,
-    2 => IntegerType::class,
-    3 => FloatType::class,
-    4 => StringType::class,
-    5 => TextType::class,
-    9 => DateType::class,
-    10 => DateTimeType::class
+    BooleanType::TYPE => BooleanType::class,
+    IntegerType::TYPE => IntegerType::class,
+    FloatType::TYPE => FloatType::class,
+    StringType::TYPE => StringType::class,
+    TextType::TYPE => TextType::class,
+    DateType::TYPE => DateType::class,
+    DateTimeType::TYPE => DateTimeType::class
 ])]
 abstract class AbstractValue implements ValueInterface
 {
     use EavCoreModelTrait;
-
-    /**
-     * @var mixed
-     */
-    protected mixed $value;
 
     /**
      * @var Entity
@@ -84,21 +79,13 @@ abstract class AbstractValue implements ValueInterface
     protected Attribute $attribute;
 
     /**
-     * {@inheritDoc}
+     * @param Entity $entity
+     * @param Attribute $attribute
      */
-    public function getValue(): mixed
+    public function __construct(Entity $entity, Attribute $attribute)
     {
-        return $this->value;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setValue(mixed $value): self
-    {
-        $this->value = $value;
-
-        return $this;
+        $this->entity = $entity;
+        $this->attribute = $attribute;
     }
 
     /**
@@ -110,35 +97,11 @@ abstract class AbstractValue implements ValueInterface
     }
 
     /**
-     * @param Entity $entity
-     *
-     * @return self
-     */
-    public function setEntity(Entity $entity): self
-    {
-        $this->entity = $entity;
-
-        return $this;
-    }
-
-    /**
      * @return Attribute
      */
     public function getAttribute(): Attribute
     {
         return $this->attribute;
-    }
-
-    /**
-     * @param Attribute $attribute
-     *
-     * @return self
-     */
-    public function setAttribute(Attribute $attribute): self
-    {
-        $this->attribute = $attribute;
-
-        return $this;
     }
 
     /**
