@@ -16,18 +16,40 @@ use Micro\Plugin\Eav\Entity\Value\ValueHasDefaultInterface;
 #[ORM\Table(name: 'micro_eav_value_string')]
 class StringType extends AbstractValue implements ValueHasDefaultInterface
 {
+    public const TYPE = 'string';
+
     /**
      * @var string
      * @ORM\Column( name="val", type="string", nullable=true , length=2048)
      */
-    #[ORM\Column(name: 'val', type: 'string', length: 2048, nullable: true)]
-    protected mixed $value = null;
+    #[ORM\Column(name: 'val', type: 'string', length: 2048, nullable: false)]
+    protected string $value;
 
     /**
      * {@inheritDoc}
      */
     public function getCastType(): string
     {
-        return 'string';
+        return self::TYPE;
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setValue(string $value): self
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getValue(): string
+    {
+        return $this->value;
     }
 }

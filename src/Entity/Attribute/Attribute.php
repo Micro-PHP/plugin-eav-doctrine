@@ -138,14 +138,16 @@ class Attribute implements AttributeInterface
     }
 
     /**
-     * @return string|null
+     * {@inheritDoc}
      */
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     public function setName( string $name ): Attribute
     {
 
@@ -163,21 +165,11 @@ class Attribute implements AttributeInterface
     }
 
     /**
-     * {@inheritDoc}
+     * @return Schema|null
      */
-    public function getSchema(): ?SchemaInterface
+    public function getSchema(): ?Schema
     {
         return $this->schema;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setSchema(SchemaInterface $Schema ): self
-    {
-        $this->schema = $Schema;
-
-        return $this;
     }
 
     /**

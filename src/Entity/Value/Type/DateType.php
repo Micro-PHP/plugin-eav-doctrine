@@ -16,12 +16,14 @@ use Micro\Plugin\Eav\Entity\Value\ValueHasDefaultInterface;
 #[ORM\Table(name: 'micro_eav_value_date')]
 class DateType extends AbstractValue implements ValueHasDefaultInterface
 {
+    public const TYPE = 'date';
+
     /**
      * @var \DateTime
      * @ORM\Column( name="val", type="DateTime", nullable=false )
      */
     #[ORM\Column(name: 'val', type: 'datetime', nullable: false)]
-    protected mixed $value = null;
+    protected \DateTime $value;
 
     /**
      * {@inheritDoc}
@@ -42,5 +44,13 @@ class DateType extends AbstractValue implements ValueHasDefaultInterface
         }
 
         return $v->format('Y-m-d');
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getValue(): \DateTime
+    {
+        return $this->value;
     }
 }

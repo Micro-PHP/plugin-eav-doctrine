@@ -1,14 +1,21 @@
 <?php
+declare(strict_types=1);
 
 namespace Micro\Plugin\Eav\Doctrine;
 
 use Micro\Plugin\Doctrine\DoctrineFacadeInterface;
 use Micro\Plugin\Eav\Business\Attribute\AttributeFactoryInterface;
-use Micro\Plugin\Eav\Business\Entity\Manager\EntityManagerFactoryInterface;
-use Micro\Plugin\Eav\Business\Schema\SchemaManagerFactoryInterface;
+use Micro\Plugin\Eav\Business\Entity\Manager\EntityObjectManagerFactoryInterface;
+use Micro\Plugin\Eav\Business\Entity\Resolver\EntityResolverFactoryInterface;
+use Micro\Plugin\Eav\Business\Schema\Manager\SchemaObjectManagerFactoryInterface;
+use Micro\Plugin\Eav\Business\Schema\Resolver\SchemaResolverFactoryInterface;
+use Micro\Plugin\Eav\Business\Schema\SchemaAttributeManagerFactoryInterface;
 use Micro\Plugin\Eav\Doctrine\Business\Attribute\AttributeFactory;
-use Micro\Plugin\Eav\Doctrine\Business\Entity\Manager\EntityManagerFactory;
-use Micro\Plugin\Eav\Doctrine\Business\Schema\SchemaManagerFactory;
+use Micro\Plugin\Eav\Doctrine\Business\Entity\Manager\EntityObjectManagerFactory;
+use Micro\Plugin\Eav\Doctrine\Business\Entity\Resolver\EntityResolverFactory;
+use Micro\Plugin\Eav\Doctrine\Business\Schema\Manager\SchemaObjectManagerFactory;
+use Micro\Plugin\Eav\Doctrine\Business\Schema\Resolver\SchemaResolverFactory;
+use Micro\Plugin\Eav\Doctrine\Business\Schema\SchemaAttributeManagerFactory;
 use Micro\Plugin\Eav\EavCorePlugin;
 
 class EavDoctrinePlugin extends EavCorePlugin
@@ -24,17 +31,33 @@ class EavDoctrinePlugin extends EavCorePlugin
     /**
      * {@inheritDoc}
      */
-    protected function createSchemaManagerFactory(): SchemaManagerFactoryInterface
+    protected function createSchemaResolverFactory(): SchemaResolverFactoryInterface
     {
-        return new SchemaManagerFactory($this->lookupDoctrineFacade());
+        return new SchemaResolverFactory($this->lookupDoctrineFacade());
     }
 
     /**
-     * @return EntityManagerFactoryInterface
+     * {@inheritDoc}
      */
-    protected function createEntityManagerFactory(): EntityManagerFactoryInterface
+    protected function createSchemaAttributeManagerFactory(): SchemaAttributeManagerFactoryInterface
     {
-        return new EntityManagerFactory($this->lookupDoctrineFacade());
+        return new SchemaAttributeManagerFactory();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function createSchemaObjectManagerFactory(): SchemaObjectManagerFactoryInterface
+    {
+        return new SchemaObjectManagerFactory($this->lookupDoctrineFacade());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function createEntityObjectManagerFactory(): EntityObjectManagerFactoryInterface
+    {
+        return new EntityObjectManagerFactory($this->lookupDoctrineFacade());
     }
 
     /**
@@ -43,5 +66,13 @@ class EavDoctrinePlugin extends EavCorePlugin
     protected function lookupDoctrineFacade(): DoctrineFacadeInterface
     {
         return $this->container->get(DoctrineFacadeInterface::class);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function createEntityResolverFactory(): EntityResolverFactoryInterface
+    {
+        return new EntityResolverFactory($this->lookupDoctrineFacade());
     }
 }

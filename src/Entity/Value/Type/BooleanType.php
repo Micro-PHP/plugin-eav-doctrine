@@ -16,19 +16,22 @@ use Micro\Plugin\Eav\Entity\Value\ValueHasDefaultInterface;
 #[ORM\Table(name: 'micro_eav_value_boolean')]
 class BooleanType extends AbstractValue implements ValueHasDefaultInterface
 {
+
+    public const TYPE = 'bool';
+
     /**
      * @var boolean
      * @ORM\Column( name="val", type="boolean", nullable=false )
      */
     #[ORM\Column(name: 'val', type: 'boolean', nullable: false)]
-    protected mixed $value = false;
+    protected bool $value = false;
 
     /**
      * {@inheritDoc}
      */
     public function getCastType(): string
     {
-        return 'boolean';
+        return self::getType();
     }
 
     /**
@@ -37,5 +40,32 @@ class BooleanType extends AbstractValue implements ValueHasDefaultInterface
     public function __toString(): string
     {
         return $this->value ? 'true': 'false';
+    }
+
+    /**
+     * @param bool $value
+     * @return AbstractValue
+     */
+    public function setValue(bool $value): AbstractValue
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public static function getType(): string
+    {
+        return 'bool';
+    }
+
+    /**
+     * @return bool
+     */
+    public function getValue(): bool
+    {
+        return $this->value;
     }
 }

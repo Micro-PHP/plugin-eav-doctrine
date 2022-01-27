@@ -16,19 +16,21 @@ use Micro\Plugin\Eav\Entity\Value\ValueHasDefaultInterface;
 #[ORM\Table(name: 'micro_eav_value_integer')]
 class IntegerType extends AbstractValue implements ValueHasDefaultInterface
 {
+    public const TYPE = 'int';
+
     /**
-     * @var float
-     * @ORM\Column( name="val", type="integer", nullable=true )
+     * @var int
+     * @ORM\Column( name="val", type="integer", nullable=false )
      */
-    #[ORM\Column(name: 'val', type: 'integer', nullable: true)]
-    protected mixed $value = null;
+    #[ORM\Column(name: 'val', type: 'integer', nullable: false)]
+    protected int $value;
 
     /**
      * {@inheritDoc}
      */
     public function getCastType(): string
     {
-        return 'int';
+        return self::TYPE;
     }
 
     /**
@@ -37,5 +39,23 @@ class IntegerType extends AbstractValue implements ValueHasDefaultInterface
     public function __toString(): string
     {
         return sprintf('%d', $this->value );
+    }
+
+    /**
+     * @param int $value
+     *
+     * @return $this
+     */
+    public function setValue(int $value): self
+    {
+        $this->value = $value;
+    }
+
+    /**
+     * @return int
+     */
+    public function getValue(): int
+    {
+        return $this->value;
     }
 }
