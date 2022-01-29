@@ -29,7 +29,7 @@ class UniqueIndex implements UniqueIndexInterface
      * @ORM\ManyToOne(targetEntity="Entity", fetch="LAZY", inversedBy="uniqueIndexes")
      * @ORM\JoinColumn(name="entity_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
-    #[ORM\ManyToOne(targetEntity: Entity::class, fetch: 'LAZY', inversedBy: 'uniqueIndexes')]
+    #[ORM\ManyToOne(targetEntity: Entity::class, cascade: ['persist', 'merge'], fetch: 'LAZY', inversedBy: 'uniqueIndexes')]
     #[ORM\JoinColumn(name: 'entity_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     private Entity $entity;
 
@@ -41,6 +41,18 @@ class UniqueIndex implements UniqueIndexInterface
     #[ORM\ManyToOne(targetEntity: Attribute::class, cascade: ['persist', 'merge'], fetch: 'LAZY', inversedBy: 'uniqueIndexes')]
     #[ORM\JoinColumn(name: 'attribute_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     private Attribute $attribute;
+
+    /**
+     * @param Entity $entity
+     * @param Attribute $attribute
+     * @param string $uniqueKey
+     */
+    public function __construct(Entity $entity, Attribute $attribute, string $uniqueKey)
+    {
+        $this->entity = $entity;
+        $this->attribute = $attribute;
+        $this->uniqueKey = $uniqueKey;
+    }
 
     /**
      * {@inheritDoc}

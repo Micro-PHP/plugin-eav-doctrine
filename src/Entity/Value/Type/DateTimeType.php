@@ -7,32 +7,34 @@ use Micro\Plugin\Eav\Doctrine\Entity\Entity\Entity;
 use Micro\Plugin\Eav\Doctrine\Entity\Value\AbstractValue;
 use Doctrine\ORM\Mapping as ORM;
 use Micro\Plugin\Eav\Entity\Value\ValueHasDefaultInterface;
+use Micro\Plugin\Eav\Exception\InvalidArgumentException;
 
 /**
  * Class DateTimeType
  *
- * @ORM\Table(name="micro_eav_value_datetime")
+ * @ORM\Table(name="micro_eav_value_datetime",indexes={
+ *   @ORM\Index(name="rel_idx", columns={"attribute_id", "entity_id"})
+ * })
  * @ORM\Entity()
  */
 #[ORM\Entity]
 #[ORM\Table(name: 'micro_eav_value_datetime')]
+#[ORM\Index(columns: ['attribute_id', 'entity_id'], name: 'rel_idx')]
 class DateTimeType extends AbstractValue implements ValueHasDefaultInterface
 {
-    public const TYPE = 'datetime';
-
     /**
      * @var \DateTime
      * @ORM\Column( name="val", type="date", nullable=false )
      */
     #[ORM\Column(name: 'val', type: 'date', nullable: false)]
-    protected \DateTime $value;
+    protected mixed $value = null;
 
     /**
-     * {@inheritDoc}
+     * @return \DateTimeInterface|null
      */
-    public function getCastType(): string
+    public function getValue(): ?\DateTimeInterface
     {
-        return \DateTime::class;
+        return $this->value;
     }
 
     /**
@@ -48,22 +50,4 @@ class DateTimeType extends AbstractValue implements ValueHasDefaultInterface
         return $v->format(DATE_ATOM);
     }
 
-    /**
-     * @param \DateTime $value
-     * @return $this
-     */
-    public function setValue(\DateTime $value): self
-    {
-        $this->value = $value;
-
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getValue(): DateTime
-    {
-        return $this->value;
-    }
 }

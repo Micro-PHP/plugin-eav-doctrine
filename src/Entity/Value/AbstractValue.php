@@ -13,41 +13,14 @@ use Micro\Plugin\Eav\Doctrine\Entity\Value\Type\IntegerType;
 use Micro\Plugin\Eav\Doctrine\Entity\Value\Type\StringType;
 use Micro\Plugin\Eav\Doctrine\Entity\Value\Type\TextType;
 use Micro\Plugin\Eav\Entity\Value\ValueInterface;
+use Micro\Plugin\Eav\Exception\InvalidArgumentException;
 
 /**
  * Class AbstractValue
  *
- *
- * @ORM\Entity()
- * @ORM\Table(name="micro_eav_abstract_value", indexes={
- *   @ORM\Index(name="rel_idx", columns={"attribute_id", "entity_id"})
- *     })
- * @ORM\InheritanceType("JOINED")
- * @ORM\DiscriminatorColumn(name="value_type", type="string")
- * @ORM\DiscriminatorMap({
- *     BooleanType::TYPE => BooleanType::class,
- *     IntegerType::TYPE => IntegerType::class,
- *     FloatType::TYPE => FloatType::class,
- *     StringType::TYPE => StringType::class,
- *     TextType::TYPE => TextType::class,
- *     DateType::TYPE => DateType::class,
- *     DateTimeType::TYPE => DateTimeType::class
- * })
+ * @ORM\MappedSuperclass()
  */
-#[ORM\Entity]
-#[ORM\Table(name: 'micro_eav_value_abstract')]
-#[ORM\Index(columns: ['attribute_id', 'entity_id'], name: 'rel_idx')]
-#[ORM\InheritanceType('JOINED')]
-#[ORM\DiscriminatorColumn('value_type', type: 'string')]
-#[ORM\DiscriminatorMap([
-    BooleanType::TYPE => BooleanType::class,
-    IntegerType::TYPE => IntegerType::class,
-    FloatType::TYPE => FloatType::class,
-    StringType::TYPE => StringType::class,
-    TextType::TYPE => TextType::class,
-    DateType::TYPE => DateType::class,
-    DateTimeType::TYPE => DateTimeType::class
-])]
+#[ORM\MappedSuperclass]
 abstract class AbstractValue implements ValueInterface
 {
     use EavCoreModelTrait;
@@ -86,6 +59,26 @@ abstract class AbstractValue implements ValueInterface
     {
         $this->entity = $entity;
         $this->attribute = $attribute;
+    }
+
+    /**
+     * @param mixed $value
+     *
+     * @return $this
+     */
+    public function setValue(mixed $value): self
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValue()
+    {
+        return $this->value;
     }
 
     /**
