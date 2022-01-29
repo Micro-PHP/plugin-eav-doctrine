@@ -5,34 +5,29 @@ namespace Micro\Plugin\Eav\Doctrine\Entity\Value\Type;
 use Micro\Plugin\Eav\Doctrine\Entity\Value\AbstractValue;
 use Doctrine\ORM\Mapping as ORM;
 use Micro\Plugin\Eav\Entity\Value\ValueHasDefaultInterface;
+use Micro\Plugin\Eav\Exception\InvalidArgumentException;
 
 /**
  * Class BooleanType
  *
- * @ORM\Table(name="micro_eav_value_boolean")
+ * @ORM\Table(name="micro_eav_value_boolean",indexes={
+ *   @ORM\Index(name="rel_idx", columns={"attribute_id", "entity_id"})
+ * })
  * @ORM\Entity()
+ *
  */
 #[ORM\Entity]
 #[ORM\Table(name: 'micro_eav_value_boolean')]
+#[ORM\Index(columns: ['attribute_id', 'entity_id'], name: 'rel_idx')]
 class BooleanType extends AbstractValue implements ValueHasDefaultInterface
 {
-
-    public const TYPE = 'bool';
-
     /**
      * @var boolean
+     *
      * @ORM\Column( name="val", type="boolean", nullable=false )
      */
     #[ORM\Column(name: 'val', type: 'boolean', nullable: false)]
-    protected bool $value = false;
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getCastType(): string
-    {
-        return self::getType();
-    }
+    protected mixed $value = null;
 
     /**
      * {@inheritDoc}
@@ -43,28 +38,9 @@ class BooleanType extends AbstractValue implements ValueHasDefaultInterface
     }
 
     /**
-     * @param bool $value
-     * @return AbstractValue
+     * @return bool|null
      */
-    public function setValue(bool $value): AbstractValue
-    {
-        $this->value = $value;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public static function getType(): string
-    {
-        return 'bool';
-    }
-
-    /**
-     * @return bool
-     */
-    public function getValue(): bool
+    public function getValue(): ?bool
     {
         return $this->value;
     }

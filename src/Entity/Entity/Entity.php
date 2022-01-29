@@ -11,6 +11,7 @@ use Micro\Plugin\Eav\Doctrine\Entity\Schema\Schema;
 use Micro\Plugin\Eav\Doctrine\Entity\Unique\UniqueIndex;
 use Micro\Plugin\Eav\Doctrine\Entity\Value\AbstractValue;
 use Micro\Plugin\Eav\Entity\Entity\EntityInterface;
+use Micro\Plugin\Eav\Entity\Value\ValueInterface;
 
 /**
  * @ORM\Table(name="micro_eav_entity", indexes={
@@ -63,17 +64,6 @@ class Entity implements EntityInterface
     #[ORM\JoinColumn(name: 'schema_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     private Schema $schema;
 
-    /**
-     * @var Collection
-     * @ORM\OneToMany(
-     *     targetEntity="AbstractValue",
-     *     mappedBy="entity",
-     *     cascade={"persist", "merge", "refresh"},
-     *     orphanRemoval=false,
-     *     fetch="EAGER"
-     *     )
-     */
-    #[ORM\OneToMany(mappedBy: 'entity', targetEntity: AbstractValue::class, cascade: ['persist', 'merge', 'refresh'], fetch: 'EAGER', orphanRemoval: false)]
     protected Collection $values;
 
     /**
@@ -86,7 +76,8 @@ class Entity implements EntityInterface
      * )
      * ORM\JoinColumn(name="id", referencedColumnName="entity_id", nullable=false, onDelete="CASCADE")
      */
-    #[ORM\OneToMany(mappedBy: 'entity', targetEntity: UniqueIndex::class, fetch: 'EXTRA_LAZY', orphanRemoval: false)]
+    #[ORM\OneToMany(mappedBy: 'entity', targetEntity: UniqueIndex::class, cascade: ['persist', 'remove'], fetch: 'EXTRA_LAZY', orphanRemoval: false)]
+    #[ORM\JoinColumn(name: 'id', referencedColumnName: 'entity_id', nullable: false, onDelete: 'CASCADE')]
     private Collection $uniqueIndexes;
 
     /**
@@ -136,15 +127,15 @@ class Entity implements EntityInterface
     /**
      * @return Schema
      */
-    public function getSchema(): ?Schema
+    public function getSchema(): Schema
     {
         return $this->schema;
     }
 
     /**
-     * @return Collection
+     * @return Collection<ValueInterface>
      */
-    public function getValues(): Collection
+    public function getPersistentValues(): Collection
     {
         return $this->values;
     }
@@ -153,7 +144,7 @@ class Entity implements EntityInterface
      * @param Collection $values
      * @return Entity
      */
-    public function setValues(Collection $values): Entity
+    public function setPersistentValues(Collection $values): Entity
     {
         $this->values = $values;
 

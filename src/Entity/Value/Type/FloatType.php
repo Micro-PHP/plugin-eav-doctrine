@@ -5,32 +5,34 @@ namespace Micro\Plugin\Eav\Doctrine\Entity\Value\Type;
 use Micro\Plugin\Eav\Doctrine\Entity\Value\AbstractValue;
 use Doctrine\ORM\Mapping as ORM;
 use Micro\Plugin\Eav\Entity\Value\ValueHasDefaultInterface;
+use Micro\Plugin\Eav\Exception\InvalidArgumentException;
 
 /**
  * Class FloatType
  *
- * @ORM\Table(name="micro_eav_value_float")
+ * @ORM\Table(name="micro_eav_value_float",indexes={
+ *   @ORM\Index(name="rel_idx", columns={"attribute_id", "entity_id"})
+ * })
  * @ORM\Entity()
  */
 #[ORM\Entity]
 #[ORM\Table(name: 'micro_eav_value_float')]
+#[ORM\Index(columns: ['attribute_id', 'entity_id'], name: 'rel_idx')]
 class FloatType extends AbstractValue implements ValueHasDefaultInterface
 {
-    public const TYPE = 'float';
-
     /**
      * @var float
      * @ORM\Column( name="val", type="float", nullable=false )
      */
     #[ORM\Column(name: 'val', type: 'float', nullable: false)]
-    protected float $value;
+    protected mixed $valu = null;
 
     /**
-     * {@inheritDoc}
+     * @return float|null
      */
-    public function getCastType(): string
+    public function getValue(): ?float
     {
-        return self::TYPE;
+        return $this->value;
     }
 
     /**
@@ -41,21 +43,4 @@ class FloatType extends AbstractValue implements ValueHasDefaultInterface
         return sprintf('%f', $this->value );
     }
 
-    /**
-     * @param float $value
-     *
-     * @return $this
-     */
-    public function setValue(float $value): self
-    {
-        $this->value = $value;
-    }
-
-    /**
-     * @return float
-     */
-    public function getValue(): float
-    {
-        return $this->value;
-    }
 }

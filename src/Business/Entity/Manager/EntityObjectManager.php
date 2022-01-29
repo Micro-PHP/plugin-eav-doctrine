@@ -5,6 +5,7 @@ namespace Micro\Plugin\Eav\Doctrine\Business\Entity\Manager;
 use Doctrine\ORM\EntityManagerInterface;
 use Micro\Plugin\Doctrine\DoctrineFacadeInterface;
 use Micro\Plugin\Eav\Business\Entity\Manager\EntityObjectManagerInterface;
+use Micro\Plugin\Eav\Doctrine\Entity\Entity\Entity;
 use Micro\Plugin\Eav\Entity\Entity\EntityInterface;
 
 class EntityObjectManager implements EntityObjectManagerInterface
@@ -22,7 +23,7 @@ class EntityObjectManager implements EntityObjectManagerInterface
     public function save(EntityInterface $entity): void
     {
         $manager = $this->getManager();
-
+        $this->processEntityValues($entity);
         $manager->persist($entity);
         $manager->flush();
     }
@@ -34,6 +35,7 @@ class EntityObjectManager implements EntityObjectManagerInterface
     {
         $manager = $this->getManager();
 
+        //todo remove values
         $manager->remove($entity);
         $manager->flush();
     }
@@ -44,5 +46,24 @@ class EntityObjectManager implements EntityObjectManagerInterface
     protected function getManager(): EntityManagerInterface
     {
         return $this->doctrineFacade->getManager();
+    }
+
+    /**
+     * @param Entity $entity
+     * @return void
+     */
+    protected function processEntityValues(Entity $entity): void
+    {
+        $values = $entity->getPersistentValues();
+        $manager = $this->getManager();
+        foreach ($values as $value) {
+            if($value->getValue() === null) {
+                $manager->remove($value);
+
+                continue;
+            }
+
+            $manager->persist($value);
+        }
     }
 }

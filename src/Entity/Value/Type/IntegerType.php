@@ -5,32 +5,34 @@ namespace Micro\Plugin\Eav\Doctrine\Entity\Value\Type;
 use Micro\Plugin\Eav\Doctrine\Entity\Value\AbstractValue;
 use Doctrine\ORM\Mapping as ORM;
 use Micro\Plugin\Eav\Entity\Value\ValueHasDefaultInterface;
+use Micro\Plugin\Eav\Exception\InvalidArgumentException;
 
 /**
  * Class IntegerType
  *
- * @ORM\Table(name="micro_eav_value_integer")
+ * @ORM\Table(name="micro_eav_value_integer",indexes={
+ *   @ORM\Index(name="rel_idx", columns={"attribute_id", "entity_id"})
+ * })
  * @ORM\Entity()
  */
 #[ORM\Entity]
 #[ORM\Table(name: 'micro_eav_value_integer')]
+#[ORM\Index(columns: ['attribute_id', 'entity_id'], name: 'rel_idx')]
 class IntegerType extends AbstractValue implements ValueHasDefaultInterface
 {
-    public const TYPE = 'int';
-
     /**
      * @var int
      * @ORM\Column( name="val", type="integer", nullable=false )
      */
     #[ORM\Column(name: 'val', type: 'integer', nullable: false)]
-    protected int $value;
+    protected mixed $value = null;
 
     /**
-     * {@inheritDoc}
+     * @return int|null
      */
-    public function getCastType(): string
+    public function getValue(): ?int
     {
-        return self::TYPE;
+        return $this->value;
     }
 
     /**
@@ -41,21 +43,4 @@ class IntegerType extends AbstractValue implements ValueHasDefaultInterface
         return sprintf('%d', $this->value );
     }
 
-    /**
-     * @param int $value
-     *
-     * @return $this
-     */
-    public function setValue(int $value): self
-    {
-        $this->value = $value;
-    }
-
-    /**
-     * @return int
-     */
-    public function getValue(): int
-    {
-        return $this->value;
-    }
 }
