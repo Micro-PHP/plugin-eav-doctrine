@@ -2,7 +2,6 @@
 
 namespace Micro\Plugin\Eav\Doctrine\Business\Attribute\Resolver;
 
-
 use Micro\Plugin\Eav\Business\Attribute\Resolver\EntityAttributeResolverFactoryInterface;
 use Micro\Plugin\Eav\Business\Attribute\Resolver\EntityAttributeResolverInterface;
 

@@ -16,8 +16,7 @@ class ValueResolverFactory implements ValueResolverFactoryInterface
     public function __construct(
         private DoctrineFacadeInterface $doctrineFacade,
         private ValueTypeResolverFactoryInterface $valueTypeResolverFactory
-    )
-    {
+    ) {
     }
 
     /**

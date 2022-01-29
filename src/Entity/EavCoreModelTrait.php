@@ -4,7 +4,6 @@ namespace Micro\Plugin\Eav\Doctrine\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-
 trait EavCoreModelTrait
 {
     /**

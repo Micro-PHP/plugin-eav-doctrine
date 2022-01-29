@@ -2,7 +2,6 @@
 
 namespace Micro\Plugin\Eav\Doctrine\Business\Schema;
 
-
 use Micro\Plugin\Eav\Business\Schema\SchemaAttributeManagerFactoryInterface;
 use Micro\Plugin\Eav\Business\Schema\SchemaAttributeManagerInterface;
 

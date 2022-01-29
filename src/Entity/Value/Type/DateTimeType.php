@@ -17,6 +17,7 @@ use Micro\Plugin\Eav\Exception\InvalidArgumentException;
  * })
  * @ORM\Entity()
  */
+
 #[ORM\Entity]
 #[ORM\Table(name: 'micro_eav_value_datetime')]
 #[ORM\Index(columns: ['attribute_id', 'entity_id'], name: 'rel_idx')]
@@ -43,11 +44,10 @@ class DateTimeType extends AbstractValue implements ValueHasDefaultInterface
     public function __toString(): string
     {
         $v = $this->value;
-        if(!$v) {
+        if (!$v) {
             return '';
         }
 
         return $v->format(DATE_ATOM);
     }
-
 }

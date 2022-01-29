@@ -20,8 +20,7 @@ class ValueResolver implements ValueResolverInterface
     public function __construct(
         private DoctrineFacadeInterface $doctrineFacade,
         private ValueTypeResolverFactoryInterface $valueTypeResolverFactory
-    )
-    {
+    ) {
     }
 
     /**
@@ -38,8 +37,8 @@ class ValueResolver implements ValueResolverInterface
             'attribute' => $attribute,
         ]);
 
-        if($valueObject) {
-           return $valueObject;
+        if ($valueObject) {
+            return $valueObject;
         }
 
         return new $valueType($entity, $attribute);

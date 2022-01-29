@@ -2,7 +2,6 @@
 
 namespace Micro\Plugin\Eav\Doctrine\Business\Entity\Manager;
 
-
 use Micro\Plugin\Doctrine\DoctrineFacadeInterface;
 use Micro\Plugin\Eav\Business\Entity\Manager\EntityObjectManagerFactoryInterface;
 use Micro\Plugin\Eav\Business\Entity\Manager\EntityObjectManagerInterface;

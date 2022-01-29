@@ -57,7 +57,7 @@ class EntityObjectManager implements EntityObjectManagerInterface
         $values = $entity->getPersistentValues();
         $manager = $this->getManager();
         foreach ($values as $value) {
-            if($value->getValue() === null) {
+            if ($value->getValue() === null) {
                 $manager->remove($value);
 
                 continue;

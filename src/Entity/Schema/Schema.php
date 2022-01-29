@@ -14,6 +14,7 @@ use Micro\Plugin\Eav\Entity\Schema\SchemaInterface;
  * @ORM\Entity
  * @ORM\Table(name="micro_eav_schema")
  */
+
 #[ORM\Entity]
 #[ORM\Table(name: 'micro_eav_schema')]
 class Schema implements SchemaInterface
@@ -67,7 +68,7 @@ class Schema implements SchemaInterface
      *
      * @ORM\JoinColumn(name="id", referencedColumnName="schema_id", nullable=false, onDelete="CASCADE")
      */
-    #[ORM\OneToMany(mappedBy: 'schema', targetEntity: Attribute::class, cascade: ['persist'], fetch: 'EXTRA_LAZY', orphanRemoval: false)]
+    #[ORM\OneToMany(mappedBy: 'schema', targetEntity: Attribute::class , cascade: ['persist'], fetch: 'EXTRA_LAZY', orphanRemoval: false)]
     #[ORM\JoinColumn(name: 'id', referencedColumnName: 'schema_id', nullable: false, onDelete: 'CASCADE')]
     private \ArrayAccess $attributes;
 

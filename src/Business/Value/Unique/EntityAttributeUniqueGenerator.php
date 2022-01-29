@@ -23,7 +23,7 @@ class EntityAttributeUniqueGenerator implements EntityAttributeUniqueGeneratorIn
         $uniqueKeyString = $this->generateUniqueKey($entity, $attribute, $value);
         $entityUniqueIndexCollection = $entity->getUniqueIndexes();
         foreach ($entityUniqueIndexCollection as $index) {
-            if($index->getAttribute()->getName() === $attribute->getName()) {
+            if ($index->getAttribute()->getName() === $attribute->getName()) {
                 $index->setUniqueKey($uniqueKeyString);
 
                 return;
@@ -43,7 +43,8 @@ class EntityAttributeUniqueGenerator implements EntityAttributeUniqueGeneratorIn
      */
     protected function generateUniqueKey(EntityInterface $entity, AttributeInterface $attribute, ValueInterface $value): string
     {
-        return sprintf('%s_%s_%s',
+        return sprintf(
+            '%s_%s_%s',
             get_class($entity),
             $attribute->getName(),
             $value->getValue()
