@@ -2,7 +2,6 @@
 
 namespace Micro\Plugin\Eav\Doctrine\Entity\Attribute;
 
-
 use Micro\Plugin\Eav\Doctrine\Entity\EavCoreModelTrait;
 use Micro\Plugin\Eav\Doctrine\Entity\Schema\Schema;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -15,6 +14,7 @@ use Micro\Plugin\Eav\Entity\Schema\SchemaInterface;
  * @ORM\Entity()
  * @ORM\Table(name="micro_eav_attribute")
  */
+
 #[ORM\Entity]
 #[ORM\Table(name: 'micro_eav_attribute')]
 class Attribute implements AttributeInterface
@@ -120,7 +120,7 @@ class Attribute implements AttributeInterface
      *     orphanRemoval=false
      * )
      */
-    #[ORM\OneToMany(mappedBy: 'attribute', targetEntity: UniqueIndex::class, fetch: 'EXTRA_LAZY', orphanRemoval: false)]
+    #[ORM\OneToMany(mappedBy: 'attribute', targetEntity: UniqueIndex::class , fetch: 'EXTRA_LAZY', orphanRemoval: false)]
     private $uniqueIndexes;
 
     /**
@@ -148,7 +148,7 @@ class Attribute implements AttributeInterface
     /**
      * {@inheritDoc}
      */
-    public function setName( string $name ): Attribute
+    public function setName(string $name): Attribute
     {
 
         $this->name = $name;
@@ -229,7 +229,7 @@ class Attribute implements AttributeInterface
     /**
      * {@inheritDoc}
      */
-    public function setType(String $type): Attribute
+    public function setType(string $type): Attribute
     {
         $this->type = $type;
 
@@ -239,7 +239,7 @@ class Attribute implements AttributeInterface
     /**
      * {@inheritDoc}
      */
-    public function getDefaultValue(): ?String
+    public function getDefaultValue(): ?string
     {
         return $this->defaultValue;
     }

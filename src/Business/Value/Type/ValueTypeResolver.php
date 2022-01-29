@@ -21,11 +21,11 @@ class ValueTypeResolver implements ValueTypeResolverInterface
         $valueType = $attribute->getType();
 
         foreach ($this->valueClassCollection as $class => $type) {
-            if($type === $valueType) {
+            if ($type === $valueType) {
                 return $class;
             }
         }
 
-        throw new \RuntimeException(sprintf('Attribute type "%s" is not supported', $valueType));
+        throw new() \RuntimeException(sprintf('Attribute type "%s" is not supported', $valueType));
     }
 }

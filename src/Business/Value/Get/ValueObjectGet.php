@@ -23,8 +23,7 @@ class ValueObjectGet implements ValueObjectGetInterface
         private ValueResolverFactoryInterface $valueResolverFactory,
         private EntityInterface $entity,
         private string $attributeName
-    )
-    {
+    ) {
     }
 
     /**

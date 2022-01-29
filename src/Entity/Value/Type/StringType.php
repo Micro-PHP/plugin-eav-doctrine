@@ -14,6 +14,7 @@ use Micro\Plugin\Eav\Entity\Value\ValueHasDefaultInterface;
  * })
  * @ORM\Entity()
  */
+
 #[ORM\Entity]
 #[ORM\Table(name: 'micro_eav_value_string')]
 #[ORM\Index(columns: ['attribute_id', 'entity_id'], name: 'rel_idx')]

@@ -15,6 +15,7 @@ use Micro\Plugin\Eav\Exception\InvalidArgumentException;
  * })
  * @ORM\Entity()
  */
+
 #[ORM\Entity]
 #[ORM\Table(name: 'micro_eav_value_integer')]
 #[ORM\Index(columns: ['attribute_id', 'entity_id'], name: 'rel_idx')]
@@ -40,7 +41,6 @@ class IntegerType extends AbstractValue implements ValueHasDefaultInterface
      */
     public function __toString(): string
     {
-        return sprintf('%d', $this->value );
+        return sprintf('%d', $this->value);
     }
-
 }

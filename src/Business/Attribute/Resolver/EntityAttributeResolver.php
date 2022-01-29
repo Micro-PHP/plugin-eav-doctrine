@@ -19,16 +19,16 @@ class EntityAttributeResolver implements EntityAttributeResolverInterface
     public function resolve(EntityInterface $entity, string $attributeName): AttributeInterface
     {
         foreach ($this->list($entity) as $attribute) {
-            if($attributeName === $attribute->getName()) {
+            if ($attributeName === $attribute->getName()) {
                 return $attribute;
             }
         }
 
-        throw new AttributeNotFoundException(sprintf('Attribute "%s" is not declared in schema "%s"',
-                $attributeName,
-                $entity->getSchema()->getName()
-            )
-        );
+        throw new AttributeNotFoundException(sprintf(
+            'Attribute "%s" is not declared in schema "%s"',
+            $attributeName,
+            $entity->getSchema()->getName()
+        ));
     }
 
     /**

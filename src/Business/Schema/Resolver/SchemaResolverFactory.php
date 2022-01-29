@@ -12,7 +12,8 @@ class SchemaResolverFactory implements SchemaResolverFactoryInterface
      * @param DoctrineFacadeInterface $doctrineFacade
      */
     public function __construct(private DoctrineFacadeInterface $doctrineFacade)
-    {}
+    {
+    }
 
     /**
      * {@inheritDoc}

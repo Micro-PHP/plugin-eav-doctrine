@@ -16,6 +16,7 @@ use Micro\Plugin\Eav\Exception\InvalidArgumentException;
  * @ORM\Entity()
  *
  */
+
 #[ORM\Entity]
 #[ORM\Table(name: 'micro_eav_value_boolean')]
 #[ORM\Index(columns: ['attribute_id', 'entity_id'], name: 'rel_idx')]
@@ -34,7 +35,7 @@ class BooleanType extends AbstractValue implements ValueHasDefaultInterface
      */
     public function __toString(): string
     {
-        return $this->value ? 'true': 'false';
+        return $this->value ? 'true' : 'false';
     }
 
     /**

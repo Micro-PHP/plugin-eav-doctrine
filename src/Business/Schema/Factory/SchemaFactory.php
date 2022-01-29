@@ -2,7 +2,6 @@
 
 namespace Micro\Plugin\Eav\Doctrine\Business\Schema\Factory;
 
-
 use Micro\Plugin\Eav\Business\Schema\Factory\SchemaFactoryInterface;
 use Micro\Plugin\Eav\Doctrine\Entity\Schema\Schema;
 use Micro\Plugin\Eav\Entity\Schema\SchemaInterface;

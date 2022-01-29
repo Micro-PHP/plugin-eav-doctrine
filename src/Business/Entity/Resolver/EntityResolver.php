@@ -38,13 +38,13 @@ class EntityResolver implements EntityResolverInterface
     {
         $qb = $this->createQueryBuilder($schema);
 
-        if($offsetId !== null) {
+        if ($offsetId !== null) {
             $qb
                 ->andWhere('e.id >= :offset')
                 ->setParameter('offset', (int)$offsetId);
         }
 
-        if($count !== null) {
+        if ($count !== null) {
             $qb->setMaxResults($count);
         }
 
@@ -67,7 +67,7 @@ class EntityResolver implements EntityResolverInterface
      *
      * @return QueryBuilder
      */
-    protected function createQueryBuilder(SchemaInterface  $schema): QueryBuilder
+    protected function createQueryBuilder(SchemaInterface $schema): QueryBuilder
     {
         return $this->getRepository()
             ->createQueryBuilder('e')

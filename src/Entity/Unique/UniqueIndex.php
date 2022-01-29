@@ -12,11 +12,13 @@ use Micro\Plugin\Eav\Entity\Unique\UniqueIndexInterface;
  * @ORM\Table(name="micro_eav_unique_idx")
  * @ORM\Entity()
  */
+
 #[ORM\Table(name: 'micro_eav_unique_idx')]
 #[ORM\Entity]
 class UniqueIndex implements UniqueIndexInterface
 {
     use EavCoreModelTrait;
+
     /**
      * @var string
      * @ORM\Column(name="unique_key", unique=true, length=256, nullable=false)

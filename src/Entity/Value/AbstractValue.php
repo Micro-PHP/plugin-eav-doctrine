@@ -1,6 +1,7 @@
 <?php
 
 namespace Micro\Plugin\Eav\Doctrine\Entity\Value;
+
 use Doctrine\ORM\Mapping as ORM;
 use Micro\Plugin\Eav\Doctrine\Entity\Attribute\Attribute;
 use Micro\Plugin\Eav\Doctrine\Entity\EavCoreModelTrait;
@@ -20,6 +21,7 @@ use Micro\Plugin\Eav\Exception\InvalidArgumentException;
  *
  * @ORM\MappedSuperclass()
  */
+
 #[ORM\MappedSuperclass]
 abstract class AbstractValue implements ValueInterface
 {
@@ -36,7 +38,7 @@ abstract class AbstractValue implements ValueInterface
      * @ORM\JoinColumn(name="entity_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      * @ORM\Cache("NONSTRICT_READ_WRITE", region="eav")
      */
-    #[ORM\ManyToOne(targetEntity: Entity::class, cascade: ['persist'], fetch: 'EXTRA_LAZY', inversedBy: 'values')]
+    #[ORM\ManyToOne(targetEntity: Entity::class , cascade: ['persist'], fetch: 'EXTRA_LAZY', inversedBy: 'values')]
     protected $entity;
 
     /**

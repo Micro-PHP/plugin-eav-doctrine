@@ -8,7 +8,6 @@ use Micro\Plugin\Eav\Entity\Attribute\AttributeInterface;
 use Micro\Plugin\Eav\Entity\Schema\SchemaInterface;
 use Micro\Plugin\Eav\Exception\AttributeNotFoundException;
 
-
 class SchemaAttributeManager implements SchemaAttributeManagerInterface
 {
     /**
@@ -45,7 +44,7 @@ class SchemaAttributeManager implements SchemaAttributeManagerInterface
     public function getAttribute(SchemaInterface $schema, string $attributeName): AttributeInterface
     {
         foreach ($schema->getAttributes() as $attribute) {
-            if($attribute->getName() === $attributeName) {
+            if ($attribute->getName() === $attributeName) {
                 return $attribute;
             }
         }

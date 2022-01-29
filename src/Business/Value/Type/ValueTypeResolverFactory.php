@@ -2,7 +2,6 @@
 
 namespace Micro\Plugin\Eav\Doctrine\Business\Value\Type;
 
-
 class ValueTypeResolverFactory implements ValueTypeResolverFactoryInterface
 {
     /**
