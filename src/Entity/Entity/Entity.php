@@ -97,7 +97,7 @@ class Entity implements EntityInterface
     #[ORM\PrePersist]
     public function prePersist(): void
     {
-        $this->createdAt = new() \DateTime();
+        $this->createdAt = new \DateTime();
     }
 
     /**
@@ -106,7 +106,7 @@ class Entity implements EntityInterface
     #[ORM\PreUpdate]
     public function preUpdate(): void
     {
-        $this->updatedAt = new() \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 
     /**

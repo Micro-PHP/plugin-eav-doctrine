@@ -26,6 +26,6 @@ class ValueTypeResolver implements ValueTypeResolverInterface
             }
         }
 
-        throw new() \RuntimeException(sprintf('Attribute type "%s" is not supported', $valueType));
+        throw new \RuntimeException(sprintf('Attribute type "%s" is not supported', $valueType));
     }
 }
