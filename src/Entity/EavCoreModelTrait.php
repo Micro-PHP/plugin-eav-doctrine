@@ -14,7 +14,7 @@ trait EavCoreModelTrait
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    protected int $id;
+    protected ?int $id = null;
 
     /**
      * @return int
