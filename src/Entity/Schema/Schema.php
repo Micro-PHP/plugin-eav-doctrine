@@ -10,6 +10,8 @@ use Micro\Plugin\Eav\Doctrine\Entity\EavCoreModelTrait;
 use Micro\Plugin\Eav\Doctrine\Entity\Entity\Entity;
 use Micro\Plugin\Eav\Entity\Schema\SchemaInterface;
 
+// phpcs:ignoreFile
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="micro_eav_schema")
@@ -95,7 +97,7 @@ class Schema implements SchemaInterface
     public function __construct(string $name)
     {
         $this->attributes = new ArrayCollection([]);
-        $this->entities = new ArrayCollection([]);
+        $this->entities   = new ArrayCollection([]);
 
         $this->name = $name;
     }

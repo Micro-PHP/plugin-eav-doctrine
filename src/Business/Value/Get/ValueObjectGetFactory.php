@@ -15,9 +15,10 @@ class ValueObjectGetFactory implements ValueObjectGetFactoryInterface
      * @param ValueResolverFactoryInterface $valueResolverFactory
      */
     public function __construct(
-        private EntityAttributeResolverFactoryInterface $entityAttributeResolverFactory,
-        private ValueResolverFactoryInterface $valueResolverFactory
-    ) {
+    private EntityAttributeResolverFactoryInterface $entityAttributeResolverFactory,
+    private ValueResolverFactoryInterface $valueResolverFactory
+    )
+    {
     }
 
     /**

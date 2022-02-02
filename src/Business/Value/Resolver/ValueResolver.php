@@ -18,9 +18,10 @@ class ValueResolver implements ValueResolverInterface
      * @param ValueTypeResolverFactoryInterface $valueTypeResolverFactory
      */
     public function __construct(
-        private DoctrineFacadeInterface $doctrineFacade,
-        private ValueTypeResolverFactoryInterface $valueTypeResolverFactory
-    ) {
+    private DoctrineFacadeInterface $doctrineFacade,
+    private ValueTypeResolverFactoryInterface $valueTypeResolverFactory
+    )
+    {
     }
 
     /**
@@ -30,9 +31,9 @@ class ValueResolver implements ValueResolverInterface
      */
     public function resolve(EntityInterface $entity, AttributeInterface $attribute): ValueInterface
     {
-        $valueType = $this->resolveValueType($attribute);
+        $valueType       = $this->resolveValueType($attribute);
         $valueRepository = $this->getValueRepository($valueType);
-        $valueObject = $valueRepository->findOneBy([
+        $valueObject     = $valueRepository->findOneBy([
             'entity'    => $entity,
             'attribute' => $attribute,
         ]);

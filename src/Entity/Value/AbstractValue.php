@@ -16,6 +16,8 @@ use Micro\Plugin\Eav\Doctrine\Entity\Value\Type\TextType;
 use Micro\Plugin\Eav\Entity\Value\ValueInterface;
 use Micro\Plugin\Eav\Exception\InvalidArgumentException;
 
+// phpcs:ignoreFile
+
 /**
  * Class AbstractValue
  *
@@ -59,7 +61,7 @@ abstract class AbstractValue implements ValueInterface
      */
     public function __construct(Entity $entity, Attribute $attribute)
     {
-        $this->entity = $entity;
+        $this->entity    = $entity;
         $this->attribute = $attribute;
     }
 
