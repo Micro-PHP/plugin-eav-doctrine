@@ -54,7 +54,7 @@ class EntityObjectManager implements EntityObjectManagerInterface
      */
     protected function processEntityValues(Entity $entity): void
     {
-        $values = $entity->getPersistentValues();
+        $values  = $entity->getPersistentValues();
         $manager = $this->getManager();
         foreach ($values as $value) {
             if ($value->getValue() === null) {

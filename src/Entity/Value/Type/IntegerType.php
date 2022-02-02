@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Micro\Plugin\Eav\Entity\Value\ValueHasDefaultInterface;
 use Micro\Plugin\Eav\Exception\InvalidArgumentException;
 
+// phpcs:ignoreFile
+
 /**
  * Class IntegerType
  *

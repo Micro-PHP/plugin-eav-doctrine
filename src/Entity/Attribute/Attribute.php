@@ -10,6 +10,8 @@ use Micro\Plugin\Eav\Doctrine\Entity\Unique\UniqueIndex;
 use Micro\Plugin\Eav\Entity\Attribute\AttributeInterface;
 use Micro\Plugin\Eav\Entity\Schema\SchemaInterface;
 
+// phpcs:ignoreFile
+
 /**
  * @ORM\Entity()
  * @ORM\Table(name="micro_eav_attribute")
@@ -132,9 +134,9 @@ class Attribute implements AttributeInterface
     {
         $this->uniqueIndexes = new ArrayCollection();
 
-        $this->name = $name;
+        $this->name   = $name;
         $this->schema = $schema;
-        $this->type = $type;
+        $this->type   = $type;
     }
 
     /**

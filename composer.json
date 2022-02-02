@@ -15,7 +15,6 @@
             "email": "stanislau_komar@epam.com"
         }
     ],
-    "minimum-stability": "stable",
     "require": {
         "micro/plugin-doctrine": "^0.1",
         "micro/plugin-eav-core": "^0.1"

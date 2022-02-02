@@ -20,7 +20,7 @@ class EntityAttributeUniqueGenerator implements EntityAttributeUniqueGeneratorIn
      */
     public function generate(EntityInterface $entity, AttributeInterface $attribute, ValueInterface $value): void
     {
-        $uniqueKeyString = $this->generateUniqueKey($entity, $attribute, $value);
+        $uniqueKeyString             = $this->generateUniqueKey($entity, $attribute, $value);
         $entityUniqueIndexCollection = $entity->getUniqueIndexes();
         foreach ($entityUniqueIndexCollection as $index) {
             if ($index->getAttribute()->getName() === $attribute->getName()) {

@@ -6,6 +6,8 @@ use Micro\Plugin\Eav\Doctrine\Entity\Value\AbstractValue;
 use Doctrine\ORM\Mapping as ORM;
 use Micro\Plugin\Eav\Entity\Value\ValueHasDefaultInterface;
 
+// phpcs:ignoreFile
+
 /**
  * Class StringType
  *

@@ -8,6 +8,8 @@ use Micro\Plugin\Eav\Doctrine\Entity\EavCoreModelTrait;
 use Micro\Plugin\Eav\Doctrine\Entity\Entity\Entity;
 use Micro\Plugin\Eav\Entity\Unique\UniqueIndexInterface;
 
+// phpcs:ignoreFile
+
 /**
  * @ORM\Table(name="micro_eav_unique_idx")
  * @ORM\Entity()
@@ -51,7 +53,7 @@ class UniqueIndex implements UniqueIndexInterface
      */
     public function __construct(Entity $entity, Attribute $attribute, string $uniqueKey)
     {
-        $this->entity = $entity;
+        $this->entity    = $entity;
         $this->attribute = $attribute;
         $this->uniqueKey = $uniqueKey;
     }

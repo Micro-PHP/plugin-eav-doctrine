@@ -9,9 +9,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Micro\Plugin\Eav\Doctrine\Entity\EavCoreModelTrait;
 use Micro\Plugin\Eav\Doctrine\Entity\Schema\Schema;
 use Micro\Plugin\Eav\Doctrine\Entity\Unique\UniqueIndex;
-use Micro\Plugin\Eav\Doctrine\Entity\Value\AbstractValue;
 use Micro\Plugin\Eav\Entity\Entity\EntityInterface;
 use Micro\Plugin\Eav\Entity\Value\ValueInterface;
+
+// phpcs:ignoreFile
 
 /**
  * @ORM\Table(name="micro_eav_entity", indexes={
@@ -86,9 +87,9 @@ class Entity implements EntityInterface
      */
     public function __construct(Schema $schema)
     {
-        $this->values = new ArrayCollection([]);
+        $this->values        = new ArrayCollection([]);
         $this->uniqueIndexes = new ArrayCollection([]);
-        $this->schema = $schema;
+        $this->schema        = $schema;
     }
 
     /**

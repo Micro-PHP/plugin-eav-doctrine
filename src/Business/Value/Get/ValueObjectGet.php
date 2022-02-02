@@ -19,11 +19,12 @@ class ValueObjectGet implements ValueObjectGetInterface
      * @param string $attributeName
      */
     public function __construct(
-        private EntityAttributeResolverFactoryInterface $entityAttributeResolverFactory,
-        private ValueResolverFactoryInterface $valueResolverFactory,
-        private EntityInterface $entity,
-        private string $attributeName
-    ) {
+    private EntityAttributeResolverFactoryInterface $entityAttributeResolverFactory,
+    private ValueResolverFactoryInterface $valueResolverFactory,
+    private EntityInterface $entity,
+    private string $attributeName
+    )
+    {
     }
 
     /**
